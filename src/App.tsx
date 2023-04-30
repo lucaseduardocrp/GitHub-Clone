@@ -1,4 +1,7 @@
+import 'react-calendar-heatmap';
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Profile from "./pages/Profile";
 import Repo from "./pages/Repo";
 import Header from "./components/Header";
