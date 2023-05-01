@@ -72,8 +72,6 @@ export const Botside = styled.div`
   }
 `;
 
-export const Link = styled.a``;
-
 const iconCSS = css`
   width: 16px;
   height: 16px;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Topside, Botside, Link, RepoIcon, StarIcon, ForkIcon } from './styles';
-
+import { Container, Topside, Botside, RepoIcon, StarIcon, ForkIcon } from './styles';
+import { Link } from 'react-router-dom';
 interface Props{
   username: string;
   reponame: string;
@@ -25,7 +25,7 @@ const RepoCard: React.FC<Props> = ({
       <Topside>
         <header>
           <RepoIcon />
-            <Link href={`/${username}/${reponame}`}>{reponame}</Link>
+            <Link to={`/${username}/${reponame}`}>{reponame}</Link>
         </header>
 
         <p>{description}</p>
