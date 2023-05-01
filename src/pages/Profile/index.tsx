@@ -1,11 +1,19 @@
 import React from 'react';
-import { Container, Main, LeftSide, RightSide, Repos, CalendarHeading } from './styles';
+import { Container, Main, LeftSide, RightSide, Repos, CalendarHeading, Tab, RepoIcon } from './styles';
 
 import ProfileData from '../../components/ProfileData';
 import RepoCard from '../../components/RepoCard';
 import RandomCalendar from '../../components/RandomCalendar';
 
 const Profile: React.FC = () => {
+  const TabContent = () => (
+    <div className='content'>
+      <RepoIcon />
+      <span className="label">Repositories</span>
+      <span className="number">21</span>
+    </div>
+  )
+
   return(
     <Container>
         <Main>
@@ -14,8 +22,8 @@ const Profile: React.FC = () => {
             username={'lucaseduardocrp'} 
             name={'Lucas Eduardo'} 
             avatarUrl={'https://avatars.githubusercontent.com/u/110936570?v=4'}
-            followers={0}
-            following={5}
+            followers={800}
+            following={15}
             company={'Freelancer'}
             location={'Rio de Janeiro, Brasil'}
             email={'lucaseduardocrp@gmail.com'}
@@ -24,6 +32,10 @@ const Profile: React.FC = () => {
           </LeftSide>
 
           <RightSide>
+            <Tab className='mobile'>
+              <TabContent />
+              <span className="line" />
+            </Tab>
             <Repos>
               <h2>Radom Repos</h2>
 
@@ -42,9 +54,7 @@ const Profile: React.FC = () => {
               </div>
             </Repos>
 
-            <CalendarHeading>
-              Random calendar (do not represent actual data)
-            </CalendarHeading>
+            <CalendarHeading></CalendarHeading>
 
             <RandomCalendar />
           </RightSide>
