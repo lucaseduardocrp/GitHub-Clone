@@ -7,7 +7,7 @@ interface Props{
   description?: string;
   language?: string;
   stars: number;
-  forks: number;
+  forks: string;
 }
 
 const RepoCard: React.FC<Props> = ({

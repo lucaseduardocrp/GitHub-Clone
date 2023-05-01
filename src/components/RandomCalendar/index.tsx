@@ -26,7 +26,7 @@ const RandomCalendar: React.FC = () => {
               clampedCount = Math.min(item.count, 4);
             }
 
-            return `sclae-${clampedCount}`;
+            return `scale-${clampedCount}`;
           }}
           showWeekdayLabels
         />
