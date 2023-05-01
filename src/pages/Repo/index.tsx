@@ -1,44 +1,75 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from "react-router-dom";
 
 import { Container, Breadcrumb, RepoIcon, Stats, ForkIcon, StarIcon, LinkButton, GithubIcon } from './styles';
-import { Link } from "react-router-dom";
+import { APIRepo } from '../../@types/types';
 
+interface Data {
+  repo?: APIRepo;
+  error?: string;
+}
 
 const Repo: React.FC = () => {
-  return(
+  const { username, reponame } = useParams();
+const [data, setData] = useState<Data>();
+
+  useEffect(() => {
+    fetch(`https://api.github.com/repos/${username}/${reponame}`).then(
+      async (response) => {
+        setData(
+          response.status === 404
+            ? { error: 'Repository not found!' }
+            : { repo: await response.json() }
+        );
+      }
+    );
+  }, [reponame, username]);
+
+  if (data?.error) {
+    return <h1>{data.error}</h1>;
+  }
+
+  if (!data?.repo) {
+    return <h1>Loading...</h1>;
+  }
+
+  return (
     <Container>
       <Breadcrumb>
         <RepoIcon />
-        <Link className={'username'} to={'/lucaseduardocrp'}>
-          lucaseduardocrp
+
+        <Link className={'username'} to={`/${username}`}>
+          {username}
         </Link>
 
-        <span></span>
+        <span>/</span>
 
-        <Link className={'reponame'} to={'https://github.com/lucaseduardocrp/NewPortfolio'}>NewPortfolio</Link>
+        <Link className={'reponame'} to={`/${username}/${reponame}`}>
+          {reponame}
+        </Link>
       </Breadcrumb>
 
-      <p>Contains all of my projects and informations about me</p>
+      <p>{data.repo.description}</p>
 
       <Stats>
         <li>
           <StarIcon />
-          <b>8</b>
+          <b>{data.repo.stargazers_count}</b>
           <span>stars</span>
         </li>
         <li>
           <ForkIcon />
-          <b>0</b>
+          <b>{data.repo.forks}</b>
           <span>forks</span>
         </li>
       </Stats>
 
-      <LinkButton href={'https://github.com/lucaseduardocrp/NewPortfolio'}>
+      <LinkButton href={data.repo.html_url}>
         <GithubIcon />
         <span>View on GitHub</span>
       </LinkButton>
     </Container>
-  )
-}
+  );
+};
 
 export default Repo;
